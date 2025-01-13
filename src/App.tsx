@@ -4,35 +4,23 @@ import Menu from './Components/Menu';
 import NotFoundErrorPage from './Components/ErrorPage';
 import CompanyMaster from './Components/CompanyMaster';
 import ItemMaster from './Components/ItemMaster';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
-
-  let userName: string = "John Doe";
-
-  let menuList: string[] = ["Master", "Admin", "Home"];
-
   return (
-    <div className="App">
-      <h1>Welcome to react, {userName} </h1>
-      <img src="" alt="" />
-      <p>
-        {
-          5 + 5
-        }
-      </p>
+    <div>
+      <BrowserRouter>
+        <Routes>
+          {/* Default Route */}
+          <Route path='/' element={<Menu />} />
+          {/* Component routes */}
+          <Route path='item-master' element={<ItemMaster itemList={["Item1", "Item2", "Item3", "Item4"]} />} />
+          <Route path='company-master' element={<CompanyMaster />} />
 
-      {/* <Menu /> */}
-      {/* <hr />
-      <h1>NotFoundErrorPage Component</h1> */}
-      {/* <NotFoundErrorPage></NotFoundErrorPage> */}
-      {/* <NotFoundErrorPage /> */}
-      {/* <hr />
-      <h1>Company master component</h1>
-      <CompanyMaster />
-      <hr />
-      <h1>Item master component</h1> */}
-      <ItemMaster itemList={["Item1", "Item2", "Item3", "Item4"]} ></ItemMaster>
-
+          {/* Error page route */}
+          <Route path='*' element={<NotFoundErrorPage />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
